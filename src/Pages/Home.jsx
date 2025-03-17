@@ -23,8 +23,8 @@ function Home() {
       <Skills />
       <CodingSkills />
       <About />
-      <Experience />
-      <Education />
+      {/* <Experience /> */}
+      {/* <Education /> */}
       <Portfolio />
       <Article />
       <Testimonial />

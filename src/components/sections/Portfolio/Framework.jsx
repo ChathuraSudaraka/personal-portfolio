@@ -1,14 +1,21 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaBootstrap, FaLaravel, FaReact, FaVuejs } from "react-icons/fa";
-import { SiTailwindcss, SiNextdotjs, SiExpress, SiSpringboot, SiDjango, SiDotnet } from "react-icons/si";
+import {
+  SiTailwindcss,
+  SiNextdotjs,
+  SiExpress,
+  SiSpringboot,
+  SiDjango,
+  SiDotnet,
+} from "react-icons/si";
 import { PinContainer } from "../../ui/3d-pin";
 
 const Sparkles = () => {
   const randomMove = () => Math.random() * 2 - 1;
   const randomOpacity = () => Math.random();
   const random = () => Math.random();
-  
+
   return (
     <div className="absolute inset-0">
       {[...Array(6)].map((_, i) => (
@@ -51,29 +58,29 @@ const MobileFrameworkCard = ({ framework, index }) => {
       transition: {
         delay: i * 0.1,
         duration: 0.5,
-        ease: "easeOut"
-      }
-    })
+        ease: "easeOut",
+      },
+    }),
   };
 
   const iconVariants = {
     hidden: { scale: 0, rotate: -180 },
-    visible: { 
-      scale: 1, 
+    visible: {
+      scale: 1,
       rotate: 0,
       transition: {
         type: "spring",
         stiffness: 260,
-        damping: 20
-      }
+        damping: 20,
+      },
     },
-    hover: { 
+    hover: {
       scale: 1.2,
       rotate: 360,
       transition: {
-        duration: 0.3
-      }
-    }
+        duration: 0.3,
+      },
+    },
   };
 
   return (
@@ -91,10 +98,10 @@ const MobileFrameworkCard = ({ framework, index }) => {
         <div className="absolute inset-0">
           <Sparkles />
         </div>
-        
+
         {/* Hover gradient */}
         <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-secondary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
+
         <div className="relative z-10 flex items-center gap-3">
           <motion.div
             variants={iconVariants}
@@ -105,12 +112,15 @@ const MobileFrameworkCard = ({ framework, index }) => {
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-xl blur-xl" />
             <div className="relative w-12 h-12 flex items-center justify-center bg-white dark:bg-gray-900 rounded-xl shadow-lg">
-              <framework.icon className="w-6 h-6" style={{ color: framework.color }} />
+              <framework.icon
+                className="w-6 h-6"
+                style={{ color: framework.color }}
+              />
             </div>
           </motion.div>
-          
+
           <div className="flex-1 min-w-0">
-            <motion.h3 
+            <motion.h3
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -118,7 +128,7 @@ const MobileFrameworkCard = ({ framework, index }) => {
             >
               {framework.name}
             </motion.h3>
-            <motion.span 
+            <motion.span
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
@@ -135,16 +145,31 @@ const MobileFrameworkCard = ({ framework, index }) => {
 
 const Framework = () => {
   const frameworks = [
-    // { name: "React", icon: FaReact, color: "#61DAFB", category: "Frontend" },
-    { name: "Next.js", icon: SiNextdotjs, color: "#000000", category: "Frontend" },
-    // { name: "Vue.js", icon: FaVuejs, color: "#4FC08D", category: "Frontend" },
-    // { name: "Tailwind", icon: SiTailwindcss, color: "#38B2AC", category: "CSS" },
-    // { name: "Laravel", icon: FaLaravel, color: "#FF2D20", category: "Backend" },
-    // { name: "Express", icon: SiExpress, color: "#000000", category: "Backend" },
-    // { name: "Spring Boot", icon: SiSpringboot, color: "#6DB33F", category: "Backend" },
-    // { name: "Django", icon: SiDjango, color: "#092E20", category: "Backend" },
-    // { name: ".NET", icon: SiDotnet, color: "#512BD4", category: "Backend" },
-    // { name: "Bootstrap", icon: FaBootstrap, color: "#7952B3", category: "CSS" },
+    { name: "React", icon: FaReact, color: "#61DAFB", category: "Frontend" },
+    {
+      name: "Next.js",
+      icon: SiNextdotjs,
+      color: "#000000",
+      category: "Frontend",
+    },
+    { name: "Vue.js", icon: FaVuejs, color: "#4FC08D", category: "Frontend" },
+    {
+      name: "Tailwind",
+      icon: SiTailwindcss,
+      color: "#38B2AC",
+      category: "CSS",
+    },
+    { name: "Laravel", icon: FaLaravel, color: "#FF2D20", category: "Backend" },
+    { name: "Express", icon: SiExpress, color: "#000000", category: "Backend" },
+    {
+      name: "Spring Boot",
+      icon: SiSpringboot,
+      color: "#6DB33F",
+      category: "Backend",
+    },
+    { name: "Django", icon: SiDjango, color: "#092E20", category: "Backend" },
+    { name: ".NET", icon: SiDotnet, color: "#512BD4", category: "Backend" },
+    { name: "Bootstrap", icon: FaBootstrap, color: "#7952B3", category: "CSS" },
   ];
 
   return (
@@ -164,7 +189,7 @@ const Framework = () => {
               Frameworks & Tools
             </p>
           </div>
-          
+
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
             Modern <span className="text-secondary">Technologies</span>
           </h2>
@@ -181,7 +206,7 @@ const Framework = () => {
             transition={{ duration: 0.3, delay: index * 0.1 }}
             className="aspect-[1/1] w-full"
           >
-            <PinContainer 
+            <PinContainer
               title={framework.category}
               containerClassName="w-full h-full"
             >
@@ -190,12 +215,19 @@ const Framework = () => {
                   <div className="flex flex-col items-center gap-3">
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 10,
+                      }}
                       className="relative w-14 h-14"
                     >
                       <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-full blur-xl" />
                       <div className="relative w-full h-full flex items-center justify-center bg-white dark:bg-gray-800 rounded-full shadow-lg">
-                        <framework.icon className="w-7 h-7" style={{ color: framework.color }} />
+                        <framework.icon
+                          className="w-7 h-7"
+                          style={{ color: framework.color }}
+                        />
                       </div>
                     </motion.div>
 
@@ -214,9 +246,9 @@ const Framework = () => {
       <div className="sm:hidden space-y-3">
         <div className="grid grid-cols-1 gap-3">
           {frameworks.map((framework, index) => (
-            <MobileFrameworkCard 
-              key={framework.name} 
-              framework={framework} 
+            <MobileFrameworkCard
+              key={framework.name}
+              framework={framework}
               index={index}
             />
           ))}

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { DiJavascript, DiPython, DiJava, DiPhp } from "react-icons/di";
+import { DiJavascript, DiPython, DiJava, DiPhp, DiHtml5 } from "react-icons/di";
 import { SiTypescript } from "react-icons/si";
 
 const Sparkles = () => {
@@ -47,7 +47,7 @@ const Language = () => {
     { name: "TypeScript", percent: 80, icon: SiTypescript, color: "#3178C6", darkColor: "#235A9E" },
     { name: "Python", percent: 75, icon: DiPython, color: "#306998", darkColor: "#235179" },
     { name: "Java", percent: 70, icon: DiJava, color: "#B07219", darkColor: "#945D14" },
-    { name: "C#", percent: 65, icon: DiPhp, color: "#9B4F96", darkColor: "#7A3F77" },
+    { name: "HTML", percent: 95, icon: DiHtml5, color: "#9B4F96", darkColor: "#7A3F77" },
     { name: "PHP", percent: 80, icon: DiPhp, color: "#777BB4", darkColor: "#5F6290" },
   ];
 

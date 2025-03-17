@@ -41,7 +41,7 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen" id="home">
-      <div className="container px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
+      <div className="container px-4 sm:px-6 lg:px-8 py-4 sm:py-0 lg:py-0 mx-auto max-w-7xl">
         <div className="flex flex-col lg:flex-row lg:items-center lg:gap-x-20">
           {/* Left Content */}
           <div className="flex-1 space-y-8">
