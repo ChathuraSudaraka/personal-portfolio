@@ -1,0 +1,511 @@
+/* Basic editor styles with enhanced design that match blog display */
+.tiptap {
+  /* Base editor styling */
+  position: relative;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden;
+
+  /* Remove focus outline */
+  &:focus-within {
+    box-shadow: none;
+    outline: none;
+  }
+
+  /* Advanced typography */
+  &::before {
+    content: attr(data-placeholder);
+    position: absolute;
+    color: var(--placeholder-color);
+    pointer-events: none;
+    opacity: 0.6;
+    font-style: italic;
+  }
+
+  /* Empty paragraph handling */
+  p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: var(--placeholder-color);
+    pointer-events: none;
+    height: 0;
+    font-style: italic;
+  }
+
+  :first-child {
+    margin-top: 0;
+  }
+
+  /* Enhanced heading styles */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.1;
+    font-weight: 600;
+    margin-top: 1.25em;
+    margin-bottom: 0.5em;
+  }
+
+  h1 {
+    font-size: 1.875rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  h4, h5, h6 {
+    font-size: 1rem;
+  }
+
+  /* Paragraph styling */
+  p {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+  }
+
+  /* List styles to match blog display */
+  ul, ol {
+    padding-left: 1.5rem;
+    margin: 0.75rem 0;
+
+    li {
+      margin-bottom: 0.25rem;
+      
+      p {
+        margin: 0.25rem 0;
+      }
+    }
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  /* Enhanced task list styling */
+  ul[data-type="taskList"] {
+    list-style: none;
+    padding: 0;
+    
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-bottom: 0.25rem;
+      
+      > label {
+        flex: 0 0 auto;
+        margin-right: 0.25rem;
+        user-select: none;
+      }
+      
+      > div {
+        flex: 1 1 auto;
+      }
+      
+      input[type="checkbox"] {
+        cursor: pointer;
+        appearance: none;
+        background-color: var(--checkbox-bg);
+        border: 2px solid var(--checkbox-border);
+        border-radius: 0.25em;
+        width: 1.2em;
+        height: 1.2em;
+        position: relative;
+        transition: all 0.2s ease;
+        vertical-align: middle;
+        
+        &:checked {
+          background-color: var(--checkbox-checked-bg);
+          border-color: var(--checkbox-checked-border);
+          
+          &::after {
+            content: '';
+            position: absolute;
+            left: 0.3em;
+            top: 0.1em;
+            width: 0.4em;
+            height: 0.7em;
+            border: solid var(--checkbox-check);
+            border-width: 0 0.15em 0.15em 0;
+            transform: rotate(45deg);
+          }
+        }
+        
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 0 2px var(--checkbox-focus);
+        }
+      }
+    }
+  }
+
+  /* Code and pre styling */
+  code {
+    background-color: #f1f5f9;
+    border-radius: 0.25rem;
+    padding: 0.125rem 0.25rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.875em;
+  }
+
+  pre {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    margin: 0.75rem 0;
+    overflow-x: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    
+    code {
+      background-color: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+  }
+
+  /* Enhanced blockquote styling */
+  blockquote {
+    border-left: 4px solid #3b82f6;
+    padding-left: 0.75rem;
+    margin: 0.75rem 0;
+    font-style: italic;
+    color: #4b5563;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 1rem 0;
+  }
+  
+  /* Enhanced image styling */
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 0.75rem 0;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    
+    &:hover {
+      transform: scale(1.01);
+    }
+    
+    /* Caption styling */
+    + em {
+      display: block;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--caption-color);
+      margin-top: -0.5rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+  
+  /* Link styling */
+  a {
+    color: #3b82f6;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.2s ease;
+    
+    /* Animated underline effect */
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--link-hover-color);
+      opacity: 0.7;
+      transition: width 0.3s ease;
+    }
+    
+    &:hover {
+      text-decoration: underline;
+      color: var(--link-hover-color);
+      
+      &::after {
+        width: 100%;
+      }
+    }
+    
+    /* External link indicator */
+    &[data-external="true"]::after {
+      content: "↗";
+      display: inline-block;
+      font-size: 0.8em;
+      margin-left: 0.2em;
+      opacity: 0.7;
+    }
+  }
+
+  /* Enhanced table styling to match blog display */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.75rem 0;
+    
+    td, th {
+      border: 1px solid #e5e7eb;
+      padding: 0.5rem;
+    }
+    
+    th {
+      background-color: #f9fafb;
+      font-weight: 600;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+  }
+}
+
+/* Dark mode adjustments */
+.dark .tiptap {
+  code {
+    background-color: #1e293b;
+    color: #e2e8f0;
+  }
+  
+  blockquote {
+    color: #94a3b8;
+  }
+  
+  table {
+    td, th {
+      border-color: #374151;
+    }
+    
+    th {
+      background-color: #1f2937;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #1f2937;
+    }
+  }
+  
+  hr {
+    border-color: #374151;
+  }
+}
+
+/* Make the editor look more like the final blog content */
+.ProseMirror {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  min-height: 15rem;
+  
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+/* Style overrides for the editor container */
+.tiptap-wrapper {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* Additional spacing for the editor content area */
+.EditorContent {
+  margin-top: 0;
+}
+
+/* CSS variables for light mode */
+:root {
+  /* Editor general */
+  --editor-focus-ring: rgba(59, 130, 246, 0.5);
+  --placeholder-color: #94a3b8;
+  
+  /* Typography */
+  --heading-accent: #3b82f6;
+  --anchor-color: #64748b;
+  --anchor-hover-color: #3b82f6;
+  
+  /* Lists */
+  --list-marker-color: #64748b;
+  
+  /* Code formatting */
+  --code-bg: rgba(226, 232, 240, 0.5);
+  --code-color: #334155;
+  --code-border: rgba(203, 213, 225, 0.5);
+  --pre-bg: #1e293b;
+  --pre-color: #e2e8f0;
+  --pre-border: #334155;
+  --pre-language-bg: #334155;
+  --pre-language-color: #e2e8f0;
+  --line-number-color: #94a3b8;
+  
+  /* Blockquote */
+  --blockquote-border: #3b82f6;
+  --blockquote-bg: rgba(241, 245, 249, 0.6);
+  --blockquote-color: #334155;
+  --blockquote-icon: #94a3b8;
+  --blockquote-cite: #64748b;
+  
+  /* Horizontal rule */
+  --hr-color: #cbd5e1;
+  
+  /* Table styling */
+  --table-border: #d1d5db;
+  --table-border-strong: #9ca3af;
+  --table-header-bg: #f3f4f6;
+  --table-header-text: #111827;
+  --table-row-even: #ffffff;
+  --table-row-odd: #f9fafb;
+  --table-row-hover: rgba(243, 244, 246, 0.7);
+  --table-cell-hover: rgba(236, 253, 245, 0.4);
+  --table-cell-selected: rgba(147, 197, 253, 0.3);
+  --table-focus: #3b82f6;
+  --table-resize-handle: #3b82f6;
+  --table-resize-handle-active: #2563eb;
+  --table-selection: #2563eb;
+  --table-selection-glow: rgba(37, 99, 235, 0.1);
+  --table-shadow: rgba(0, 0, 0, 0.1);
+  --table-control-bg: #f3f4f6;
+  --table-control-color: #374151;
+  --table-control-hover-bg: #e5e7eb;
+  
+  /* Links */
+  --link-color: #3b82f6;
+  --link-hover-color: #2563eb;
+  
+  /* Images */
+  --caption-color: #64748b;
+  
+  /* Tasks */
+  --checkbox-bg: #ffffff;
+  --checkbox-border: #d1d5db;
+  --checkbox-checked-bg: #3b82f6;
+  --checkbox-checked-border: #2563eb;
+  --checkbox-check: #ffffff;
+  --checkbox-focus: rgba(59, 130, 246, 0.4);
+  
+  /* Mentions and tags */
+  --mention-bg: rgba(219, 234, 254, 0.5);
+  --mention-color: #1d4ed8;
+  --mention-border: rgba(29, 78, 216, 0.2);
+  --mention-hover-bg: rgba(191, 219, 254, 0.6);
+  --tag-bg: rgba(236, 253, 245, 0.5);
+  --tag-color: #047857;
+  --tag-border: rgba(4, 120, 87, 0.2);
+  --tag-hover-bg: rgba(209, 250, 229, 0.6);
+  
+  /* Callouts */
+  --info-color: #3b82f6;
+  --info-bg: rgba(219, 234, 254, 0.5);
+  --warning-color: #eab308;
+  --warning-bg: rgba(254, 249, 195, 0.5);
+  --danger-color: #ef4444;
+  --danger-bg: rgba(254, 226, 226, 0.5);
+  --success-color: #10b981;
+  --success-bg: rgba(236, 253, 245, 0.5);
+  --note-color: #8b5cf6;
+  --note-bg: rgba(237, 233, 254, 0.5);
+}
+
+/* CSS variables for dark mode */
+.dark {
+  /* Editor general */
+  --editor-focus-ring: rgba(59, 130, 246, 0.6);
+  --placeholder-color: #64748b;
+  
+  /* Typography */
+  --heading-accent: #3b82f6;
+  --anchor-color: #94a3b8;
+  --anchor-hover-color: #60a5fa;
+  
+  /* Lists */
+  --list-marker-color: #94a3b8;
+  
+  /* Code formatting */
+  --code-bg: rgba(30, 41, 59, 0.5);
+  --code-color: #e2e8f0;
+  --code-border: rgba(71, 85, 105, 0.3);
+  --pre-bg: #0f172a;
+  --pre-color: #e2e8f0;
+  --pre-border: #1e293b;
+  --pre-language-bg: #1e293b;
+  --pre-language-color: #e2e8f0;
+  --line-number-color: #64748b;
+  
+  /* Blockquote */
+  --blockquote-border: #3b82f6;
+  --blockquote-bg: rgba(15, 23, 42, 0.5);
+  --blockquote-color: #e2e8f0;
+  --blockquote-icon: #64748b;
+  --blockquote-cite: #94a3b8;
+  
+  /* Horizontal rule */
+  --hr-color: #475569;
+  
+  /* Table styling */
+  --table-border: #374151;
+  --table-border-strong: #4b5563;
+  --table-header-bg: #1f2937;
+  --table-header-text: #e5e7eb;
+  --table-row-even: #111827;
+  --table-row-odd: #1f2937;
+  --table-row-hover: rgba(55, 65, 81, 0.7);
+  --table-cell-hover: rgba(17, 24, 39, 0.8);
+  --table-cell-selected: rgba(59, 130, 246, 0.3);
+  --table-focus: #3b82f6;
+  --table-resize-handle: #60a5fa;
+  --table-resize-handle-active: #93c5fd;
+  --table-selection: #3b82f6;
+  --table-selection-glow: rgba(59, 130, 246, 0.2);
+  --table-shadow: rgba(0, 0, 0, 0.4);
+  --table-control-bg: #1f2937;
+  --table-control-color: #e5e7eb;
+  --table-control-hover-bg: #374151;
+  
+  /* Links */
+  --link-color: #60a5fa;
+  --link-hover-color: #93c5fd;
+  
+  /* Images */
+  --caption-color: #94a3b8;
+  
+  /* Tasks */
+  --checkbox-bg: #1f2937;
+  --checkbox-border: #4b5563;
+  --checkbox-checked-bg: #3b82f6;
+  --checkbox-checked-border: #60a5fa;
+  --checkbox-check: #ffffff;
+  --checkbox-focus: rgba(59, 130, 246, 0.4);
+  
+  /* Mentions and tags */
+  --mention-bg: rgba(30, 58, 138, 0.3);
+  --mention-color: #93c5fd;
+  --mention-border: rgba(147, 197, 253, 0.3);
+  --mention-hover-bg: rgba(30, 58, 138, 0.5);
+  --tag-bg: rgba(6, 78, 59, 0.3);
+  --tag-color: #6ee7b7;
+  --tag-border: rgba(110, 231, 183, 0.3);
+  --tag-hover-bg: rgba(6, 78, 59, 0.5);
+  
+  /* Callouts */
+  --info-color: #60a5fa;
+  --info-bg: rgba(30, 58, 138, 0.3);
+  --warning-color: #fcd34d;
+  --warning-bg: rgba(113, 63, 18, 0.3);
+  --danger-color: #f87171;
+  --danger-bg: rgba(127, 29, 29, 0.3);
+  --success-color: #34d399;
+  --success-bg: rgba(6, 78, 59, 0.3);
+  --note-color: #a78bfa;
+  --note-bg: rgba(76, 29, 149, 0.3);
+}
