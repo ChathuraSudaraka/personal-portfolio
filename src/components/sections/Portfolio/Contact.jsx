@@ -69,7 +69,7 @@ const Contact = () => {
       const isDevelopment = import.meta.env.DEV;
       const apiUrl = isDevelopment 
         ? "http://localhost:8080" 
-        : import.meta.env.VITE_API_URL;
+        : import.meta.env.VITE_WEB_URL;
       
       console.log("Using API URL:", apiUrl); // Debug log
       
