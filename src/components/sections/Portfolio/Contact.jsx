@@ -64,8 +64,6 @@ const Contact = () => {
     const toastId = showToast.loading("Sending message...");
 
     try {
-      // Use environment variable or fallback to local development URL
-      // Check if we're in development or production mode
       const isDevelopment = import.meta.env.DEV;
       const apiUrl = isDevelopment 
         ? "http://localhost:8080" 
