@@ -26,6 +26,7 @@ app.use(
         "http://127.0.0.1:5173",
         "http://127.0.0.1:3000",
         "http://localhost:8080",
+        "https://chathura.eversoft.lk",
       ];
 
       if (allowedOrigins.includes(origin) || !origin) {
@@ -79,29 +80,27 @@ const getTemplate = async (template) => {
 // Set up the POST method for email submission
 app.post("/send-email", async (req, res, next) => {
   try {
-    const { first_name, last_name, user_email, message } = req.body;
-    if (!first_name || !last_name || !user_email || !message) {
+    const { name, email, message } = req.body;
+    if (!name || !email || !message) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    let html = await getTemplate("contact");
-    html = html
-      .replace(/{{firstName}}/g, first_name)
-      .replace(/{{lastName}}/g, last_name)
-      .replace(/{{email}}/g, user_email)
-      .replace(/{{message}}/g, message);
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER, // Where you want to receive emails
+      subject: `New Contact Form Message from ${name}`,
+      text: `
+        Name: ${name}
+        Email: ${email}
+        Message: ${message}
+      `,
+    };
 
-    const info = await transporter.sendMail({
-      from: `"${process.env.SMTP_FROM_NAME}" <${process.env.SMTP_FROM_EMAIL}>`,
-      to: process.env.CONTACT_FORM_TO_EMAIL,
-      subject: "New Contact Form Submission",
-      html,
-    });
-
-    res.json({ success: true, message: "Email sent successfully", info });
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Email sent successfully" });
   } catch (error) {
-    console.error("Email sending error:", error);
-    next(error);
+    console.error("Error sending email:", error);
+    res.status(500).json({ error: "Failed to send email" });
   }
 });
 
